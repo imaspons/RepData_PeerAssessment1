@@ -171,7 +171,8 @@ steps_day <- newdata %>%
   group_by(date) %>% 
   summarize(steps_day_total = sum(steps))
 
-hist(steps_day$steps_day_total)
+hist(steps_day$steps_day_total, main = "Histogram of the total number
+     of steps taken each day without missing values ", xlab= "Total number of steps")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
@@ -199,11 +200,12 @@ median(steps_day$steps_day_total)
 
 ```r
 newdata$day <- weekdays(as.POSIXct(data$date))
-newdata$days<-ifelse(newdata$day=="saturday"|newdata$day=="sunday","weekend","weekday")
+newdata$days<-ifelse(newdata$day=="sábado"|newdata$day=="domingo","weekend","weekday")
 
 steps_average_days <- newdata%>% 
   group_by(days, interval) %>% 
   summarize(steps_days_total = mean(steps))
+
 
 ggplot(aes(x=interval,y=steps_days_total),data=steps_average_days)+
   geom_line()+
